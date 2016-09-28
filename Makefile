@@ -42,8 +42,11 @@ check: $(EXEC)
 	@./$(EXEC) && diff -u baseline.ppm out.ppm || (echo Fail; exit)
 	@echo "Verified OK"
 
-call-graph: gmon.out
-	@gprof ./$(EXEC) | ../../tools/gprof2dot/gprof2dot.py | dot -Tpng -o call-graph.png
+call-graph: $(EXEC) gmon.out
+	gprof ./$(EXEC) | ../../tools/gprof2dot/gprof2dot.py | dot -Tpng -o call-graph.png
+
+gprof: $(EXEC) gmon.out
+	gprof ./$(EXEC) | less
 
 clean:
 	$(RM) $(EXEC) $(OBJS) use-models.h \

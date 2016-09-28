@@ -5,3 +5,5 @@
 raytracing
 use-models.h
 out.ppm
+call-graph.png
+*.swp
